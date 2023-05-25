@@ -26,20 +26,20 @@ const run = async (username) => {
     await producer.connect()
 //    await producer.send()
     await producer.send({
-      topic: 'test',
-      messages: [ 
-	{ 
-	  'value': `{"name": "${username}" }` 
-  	} 
+      topic: 'reaction',
+      messages: [
+        {
+          value: JSON.stringify({ userid, objectid, reactionid })
+        }
       ],
     })
-   await producer.disconnect()
+    await producer.disconnect()
 }
 
 app.get('/like', (req, res, next) => {
-  const username = req.query.name;
-  res.send({ 'name' : username } );
-  run(username).catch(e => console.error(`[example/producer] ${e.message}`, e))
+  const { userid, objectid, reactionid } = req.query;
+  res.send({ userid, objectid, reactionid });
+  run(userid, objectid, reactionid).catch(e => console.error(`[example/producer] ${e.message}`, e))
 
 });
 
