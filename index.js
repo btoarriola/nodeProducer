@@ -37,8 +37,10 @@ const run = async (userid, objectid, reactionid) => {
 }
 
 app.get('/like', (req, res, next) => {
-  const { userid, objectid, reactionid } = req.query;
-  res.send({ userid, objectid, reactionid });
+  const userid = req.query.userid;
+  const objectid = req.query.objectid;
+  const reactionid = req.query.reactionid;
+  res.send({ 'userid':userid, 'objectid': objectid, 'reactionid': reactionid });
   run(userid, objectid, reactionid).catch(e => console.error(`[example/producer] ${e.message}`, e))
 
 });
