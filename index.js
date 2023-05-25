@@ -21,7 +21,7 @@ app.get('/', (req, res, next) => {
   res.send('kafka api - adsoft');
 });
 
-const run = async (username) => {
+const run = async (userid, objectid, reactionid) => {
 
     await producer.connect()
 //    await producer.send()
@@ -29,7 +29,7 @@ const run = async (username) => {
       topic: 'reaction',
       messages: [
         {
-          value: JSON.stringify({ userid, objectid, reactionid })
+          'value': `{"userid": "${userid}","objectid": "${objectid}","reactionid": "${reactionid}" }` 
         }
       ],
     })
