@@ -86,7 +86,7 @@ const runComments = async (userid, objectid, message) => {
   await producer.disconnect()
 }
 
-app.get('/reactions', (req, res, next) => {
+app.get('/comments', (req, res, next) => {
 const userid = req.query.userid;
 const objectid = req.query.objectid;
 const message = req.query.message;
